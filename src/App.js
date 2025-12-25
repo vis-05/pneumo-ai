@@ -138,7 +138,7 @@ const PneumoniaDetectionSite = () => {
     formData.append("file", uploadedImage);
 
     const response = await fetch(
-      "https://vish-05-xray-pneumonia-backend.hf.space/predict",
+      "https://vish-05-xray-pneumonia-backend.hf.space/",
       {
         method: "POST",
         body: formData
