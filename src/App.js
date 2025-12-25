@@ -96,35 +96,71 @@ const PneumoniaDetectionSite = () => {
   };
 
   // Send image to Flask backend for pneumonia prediction
-  const analyzeImage = async () => {
-    if (!uploadedImage) return;
+  // const analyzeImage = async () => {
+  //   if (!uploadedImage) return;
     
-    setLoading(true);
-    const formData = new FormData();
-    formData.append('image', uploadedImage);
+  //   setLoading(true);
+  //   const formData = new FormData();
+  //   formData.append('image', uploadedImage);
 
-    try {
-      // Switch between local development and production API endpoints
-      const apiUrl = process.env.NODE_ENV === 'production' 
-        ? '/api/predict' 
-        : 'http://localhost:5001/api/predict';
+  //   try {
+  //     // Switch between local development and production API endpoints
+  //     const apiUrl = process.env.NODE_ENV === 'production' 
+  //       ? '/api/predict' 
+  //       : 'http://localhost:5001/api/predict';
       
-      const response = await fetch(apiUrl, {
-        method: 'POST',
+  //     const response = await fetch(apiUrl, {
+  //       method: 'POST',
+  //       body: formData
+  //     });
+  //     const data = await response.json();
+  //     setPrediction(data);
+  //   } catch (error) {
+  //     console.error('Prediction error:', error);
+  //     setPrediction({ 
+  //       prediction: 'Error', 
+  //       confidence: 0,
+  //       error: 'Failed to analyze image. Please try again.'
+  //     });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const analyzeImage = async () => {
+  if (!uploadedImage) return;
+
+  setLoading(true);
+  setPrediction(null);
+
+  try {
+    const formData = new FormData();
+    formData.append("file", uploadedImage);
+
+    const response = await fetch(
+      "https://vish-05-xray-pneumonia-backend.hf.space/predict",
+      {
+        method: "POST",
         body: formData
-      });
-      const data = await response.json();
-      setPrediction(data);
-    } catch (error) {
-      console.error('Prediction error:', error);
-      setPrediction({ 
-        prediction: 'Error', 
-        confidence: 0,
-        error: 'Failed to analyze image. Please try again.'
-      });
-    } finally {
-      setLoading(false);
-    }
+      }
+    );
+
+    const result = await response.json();
+
+    // Hugging Face returns: { data: [prediction, confidence] }
+    setPrediction({
+      prediction: result.data[0],
+      confidence: result.data[1]
+    });
+
+  } catch (error) {
+    console.error(error);
+    setPrediction({
+      error: "Failed to analyze image. Please try again."
+    });
+  } finally {
+    setLoading(false);
+  }
   };
 
   return (
