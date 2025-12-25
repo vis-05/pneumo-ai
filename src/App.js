@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Upload, Activity, Brain, Database, Github, AlertCircle, CheckCircle, XCircle, ChevronDown, Menu, X, ArrowUp } from 'lucide-react';
-
+import { Client } from "@gradio/client";
 // Main component for pneumonia detection web application
 // Handles image upload, ML prediction, and displays educational content about pneumonia
 const PneumoniaDetectionSite = () => {
@@ -127,41 +127,35 @@ const PneumoniaDetectionSite = () => {
   //   }
   // };
 
-  const analyzeImage = async () => {
+
+const analyzeImage = async () => {
   if (!uploadedImage) return;
 
   setLoading(true);
   setPrediction(null);
 
   try {
-    const formData = new FormData();
-    formData.append("file", uploadedImage);
-
-    const response = await fetch(
-      "https://vish-05-xray-pneumonia-backend.hf.space/",
-      {
-        method: "POST",
-        body: formData
-      }
+    const client = await Client.connect(
+      "vish-05/xray-pneumonia-backend"
     );
 
-    const result = await response.json();
+    const result = await client.predict("/predict", {
+      image: uploadedImage
+    });
 
-    // Hugging Face returns: { data: [prediction, confidence] }
     setPrediction({
       prediction: result.data[0],
       confidence: result.data[1]
     });
 
-  } catch (error) {
-    console.error(error);
-    setPrediction({
-      error: "Failed to analyze image. Please try again."
-    });
+  } catch (err) {
+    console.error(err);
+    setPrediction({ error: "Prediction failed" });
   } finally {
     setLoading(false);
   }
-  };
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 text-white">
