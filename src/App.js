@@ -728,7 +728,7 @@ const PneumoniaDetectionSite = () => {
                 <h4 className="font-semibold text-blue-300 mb-2">GitHub Repository</h4>
                 {/* Link to project's GitHub repository */}
                 <a 
-                  href="https://github.com/vis-05/PneumoAI.git" target="_blank" 
+                  href="https://github.com/vis-05/pneumo-ai.git" target="_blank" 
                   className="inline-flex items-center px-4 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors text-cyan-400 text-sm"
                 >
                   <Github className="w-4 h-4 mr-2" />
