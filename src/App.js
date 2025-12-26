@@ -234,7 +234,7 @@ const analyzeImage = async () => {
         )}
       </nav>
 
-      {/* Scroll to Top Button - appears after scrolling down */}
+      {/* Scroll to Top Button*/}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
