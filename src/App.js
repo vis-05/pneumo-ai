@@ -243,20 +243,29 @@ const analyzeImage = async () => {
             bottom: '24px',
             right: '16px',
             zIndex: 999999,
-            pointerEvents: 'auto',
-            padding: '12px',
-            background: 'linear-gradient(to right, #3b82f6, #06b6d4)',
+            padding: '14px',
+            background: 'linear-gradient(135deg, #3b82f6, #06b6d4, #8b5cf6)',
+            backgroundSize: '200% 200%',
+            animation: 'gradientShift 3s ease infinite',
             borderRadius: '50%',
-            boxShadow: '0 4px 15px rgba(59, 130, 246, 0.5)',
+            boxShadow: '0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(6, 182, 212, 0.4)',
             border: 'none',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease'
           }}
-          // className="fixed bottom-8 right-4 z-50 p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl shadow-blue-500/50 hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110 group"
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.15)';
+            e.target.style.boxShadow = '0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(6, 182, 212, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(6, 182, 212, 0.4)';
+          }}
           aria-label="Scroll to top"
         >
-          <ArrowUp style={{ width: '20px', height: '20px', color: 'white' }} />
+          <ArrowUp style={{ width: '22px', height: '22px', color: 'white' }} />
         </button>
-      )} 
+      )}
 
       {/* Hero Section - Landing page with animated background */}
       <section ref={sectionsRef.home} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
