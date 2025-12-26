@@ -156,6 +156,7 @@ pneumo-ai/
 ├── vercel.json
 ├── .gitignore
 ├── .vercelignore
+├── vercel
 └── README.md
 ```
 
