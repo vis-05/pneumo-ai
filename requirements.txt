@@ -1,5 +1,0 @@
-keras
-gradio
-pillow
-numpy
-h5py
