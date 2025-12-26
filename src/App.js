@@ -158,6 +158,7 @@ const analyzeImage = async () => {
 
 
   return (
+
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 text-white">
       {/* Fixed Navigation Bar - shrinks on scroll */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -165,7 +166,7 @@ const analyzeImage = async () => {
           ? 'bg-slate-900/95 backdrop-blur-xl border-b border-blue-500/20 py-3' 
           : 'bg-slate-900/80 backdrop-blur-lg border-b border-blue-500/20 py-4'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl overflow-hidden mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo/Brand */}
             <div className={`font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transition-all duration-300 ${
@@ -237,19 +238,32 @@ const analyzeImage = async () => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl shadow-blue-500/50 hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110 group"
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '16px',
+            zIndex: 999999,
+            pointerEvents: 'auto',
+            padding: '12px',
+            background: 'linear-gradient(to right, #3b82f6, #06b6d4)',
+            borderRadius: '50%',
+            boxShadow: '0 4px 15px rgba(59, 130, 246, 0.5)',
+            border: 'none',
+            cursor: 'pointer'
+          }}
+          // className="fixed bottom-8 right-4 z-50 p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-2xl shadow-blue-500/50 hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110 group"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-6 h-6 text-white group-hover:animate-bounce" />
+          <ArrowUp style={{ width: '20px', height: '20px', color: 'white' }} />
         </button>
-      )}
+      )} 
 
       {/* Hero Section - Landing page with animated background */}
       <section ref={sectionsRef.home} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
         {/* Animated gradient background orbs */}
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-20 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 right-10 w-72 h-72 bg-cyan-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
         </div>
         
         <div className="relative z-10 text-center px-4">
@@ -274,12 +288,12 @@ const analyzeImage = async () => {
 
       {/* Understanding Pneumonia Section - Educational content about the disease */}
       <section ref={sectionsRef.understanding} className="min-h-screen py-20 px-4 flex items-center">
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="max-w-7xl overflow-hidden mx-auto w-full">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent pb-2">
             Understanding Pneumonia
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center w-full">
             {/* Left Column - Information Cards */}
             <div className="space-y-6">
               <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-5 border border-blue-500/20 hover:border-blue-500/40 transition-all">
@@ -370,12 +384,12 @@ const analyzeImage = async () => {
 
       {/* Testing Section - Image upload and prediction results */}
       <section ref={sectionsRef.testing} className="min-h-screen py-20 px-4 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl overflow-hidden mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent pb-2">
             Test Your X-Ray
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start w-full">
             {/* Left Column - Result interpretation guide */}
             <div className="space-y-6">
               <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20">
@@ -570,18 +584,18 @@ const analyzeImage = async () => {
       </section>
 
       {/* Technical Documentation Section - Model architecture and dataset details */}
-      <section ref={sectionsRef.technical} className="min-h-screen py-20 pb-8 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section ref={sectionsRef.technical} className="min-h-screen py-20 pb-8 px-4 w-full overflow-hidden">
+        <div className="max-w-7xl overflow-hidden mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent pb-2">
             Technical Documentation
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-start w-full">
             {/* Left Column - Model visualization and metrics */}
             <div className="space-y-6">
               {/* Model architecture diagram */}
               <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20">
-                <div className="aspect-video bg-black rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <div className="aspect-video bg-black rounded-lg flex items-center justify-center mb-4 overflow-hidden w-full">
                   <img
                     src="/images/modelarch.png"
                     alt="Model Architecture Diagram"
@@ -737,8 +751,8 @@ const analyzeImage = async () => {
                   <div>
                     <h4 className="font-semibold text-blue-300 mb-2">Code Snippet</h4>
                     {/* Code block showing model definition in TensorFlow/Keras syntax */}
-                    <div className="bg-slate-900 rounded-lg p-4 text-xs font-mono overflow-x-auto border border-blue-500/30">
-                      <pre className="text-cyan-400">
+                    <div className="bg-slate-900 rounded-lg p-4 text-xs font-mono overflow-x-auto border border-blue-500/30 max-w-full">
+                      <pre className="text-cyan-400 whitespace-pre-wrap break-all overflow-hidden">
 {`model = Sequential([
     layers.Conv2D(32, kernel_size = (3,3), activation='relu', strides = 1, padding = 'same', input_shape=(150,150,1)),
     layers.BatchNormalization(),
@@ -770,34 +784,17 @@ const analyzeImage = async () => {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer className="bg-slate-900 border-t border-blue-500/20 py-5 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          {/* Copyright notice */}
-          <p className="text-blue-300 text-ml">
-            © 2024 PneumoAI Detection System
-          </p>
-          {/* Medical disclaimer - important for healthcare-related applications */}
-          <p className="text-blue-400 text-xs mt-2">
-            Not intended for clinical diagnosis. Always consult healthcare professionals.
-          </p>
-        </div>
-      </footer>
-
-      {/* Custom CSS for gradient animation */}
-      {/* This creates an animated gradient effect used elsewhere in the component */}
-      <style jsx>{`
-        /* Keyframe animation for gradient background movement */
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        /* Class to apply the gradient animation */
-        .animate-gradient {
-          background-size: 200% auto;
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
+    {/* Footer Section */}
+    <footer className="bg-slate-900 border-t border-blue-500/20 py-5 px-4 w-full">
+      <div className="max-w-7xl mx-auto text-center">
+        <p className="text-blue-300 text-sm">
+          © 2024 PneumoAI Detection System
+        </p>
+        <p className="text-blue-400 text-xs mt-2">
+          Not intended for clinical diagnosis. Always consult healthcare professionals.
+        </p>
+      </div>
+    </footer>
     </div>
   );
 };
